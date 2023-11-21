@@ -35,7 +35,7 @@ final class AIChatModel: ObservableObject {
     public var numberOfTokens = 0
     public var total_sec = 0.0
     public var predicting = false
-    public var action_button_icon = "paperplane"
+    public var action_button_icon = "arrow.up.circle.fill"
     public var model_loading = false
     //    public var model_name = "llama-7b-q5_1.bin"
     //    public var model_name = "stablelm-tuned-alpha-3b-ggml-model-q5_1.bin"
@@ -150,7 +150,7 @@ final class AIChatModel: ObservableObject {
         self.predicting = false
         self.tok_sec = Double(self.numberOfTokens)/self.total_sec
         self.numberOfTokens = 0
-        self.action_button_icon = "paperplane"
+        self.action_button_icon = "arrow.up.circle.fill"
         self.AI_typing = 0
         save_chat_history(self.messages,self.chat_name+".json")
     }
@@ -273,7 +273,7 @@ final class AIChatModel: ObservableObject {
                         }
                         self.predicting = false
                         self.numberOfTokens = 0
-                        self.action_button_icon = "paperplane"
+                        self.action_button_icon = "arrow.up.circle.fill"
                         if final_str.hasPrefix("[Error]"){
                             let message = Message(sender: .system, state: .error, text: "Eval \(final_str)", tok_sec: 0)
                             self.messages.append(message)

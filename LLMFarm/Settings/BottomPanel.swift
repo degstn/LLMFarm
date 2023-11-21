@@ -38,7 +38,7 @@ struct BottomPanelView: View {
                         tabIndex=1
                     }
                 } label: {
-                    Image(systemName: "gearshape.circle")
+                    Image(systemName: "gearshape")
                 }.buttonStyle(.borderless)
                     
                     .font(.system(size: 20))
@@ -56,8 +56,8 @@ struct BottomPanelView: View {
 }
 
 
-//struct BottomPanelView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        BottomPanelView(tabIndex: .constant(0),current_detail_view_name: .constant("Chat"))
-//    }
-//}
+struct BottomPanel_Previews: PreviewProvider {
+    static var previews: some View {
+        BottomPanelView(tabIndex: .constant(0),current_detail_view_name: .constant("Chat"))
+    }
+}

@@ -19,57 +19,47 @@ struct SettingsView: View {
     ]
 
     var body: some View {
-        ZStack(){
-            //            Color("color_bg").edgesIgnoringSafeArea(.all)
-            VStack(alignment: .leading, spacing: 5){
-                HStack{
-                    Text("Settings")
-                        .fontWeight(.semibold)
-                        .font(.title2)
-                }
-                .padding(.top)
-                .padding(.horizontal)
-                
-                VStack(){
-                    List(){
-                        NavigationLink("Models"){
-                            ModelsView("models")
-                        }
-                        NavigationLink("LoRA Adapters"){
-                            ModelsView("lora_adapters")
-                        }
-                        NavigationLink("Fine Tune"){
-                            FineTuneView().environmentObject(fineTuneModel)
-                        }
+        NavigationStack {
+                List(){
+                    NavigationLink("Models"){
+                        ModelsView("models")
+                    }
+                    NavigationLink("LoRA Adapters"){
+                        ModelsView("lora_adapters")
+                    }
+                    NavigationLink("Fine Tune"){
+                        FineTuneView().environmentObject(fineTuneModel)
+                    }
 //                        ForEach(settings_menu_items, id: \.self) { settings_menu_item in
 //                            NavigationLink(settings_menu_item["value"]!){
 ////                                ModelsView()
 //                                SettingsMenuItem(icon:settings_menu_item["icon"]!,name:settings_menu_item["name"]!,current_detail_view_name:$current_detail_view_name)
 //                            }
 //                        }
+                    Section {
+                        VStack{
+                            HStack{
+                                Image("ava0_48")
+                                    .foregroundColor(.secondary)
+                                    .font(.system(size: 40))
+                            }
+                            .buttonStyle(.borderless)
+                            .controlSize(.large)
+                            Text("LLMFarm v\(app_version)\nAuthor Artem Savkin\n2023")
+                                .font(.footnote)
+                                .frame(maxWidth: .infinity)
+                                .multilineTextAlignment(.center)
+                            
+                            
+                        }
                     }
-                    .frame(maxHeight: .infinity)
-                    .listStyle(InsetListStyle())
-                }
+        }
+        .frame(maxHeight: .infinity)
+            #if os(iOS)
+        .listStyle(.insetGrouped)
+            #endif
                 
-                VStack{
-                    HStack{
-                        Image("ava0_48")
-                            .foregroundColor(.secondary)
-                            .font(.system(size: 40))
-                    }
-                    .buttonStyle(.borderless)
-                    .controlSize(.large)
-                    Text("LLMFarm v\(app_version)\nAuthor Artem Savkin\n2023")
-                        .font(.footnote)
-                        .frame(maxWidth: .infinity)
-                        .multilineTextAlignment(.center)
-                    
-                    
-                }.opacity(0.4)
-                    .frame(maxWidth: .infinity,alignment: .center)
-                
-            }
+        .navigationTitle("Settings")
         }
     }
 }

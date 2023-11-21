@@ -92,7 +92,15 @@ struct ChatView: View {
                         //                                    .frame( alignment: .leading)
 #else
                         TextField("Type your message...", text: $inputText)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .padding([.leading, .trailing])
+                            .padding([.top, .bottom], 7)
+                            .overlay(
+                                    Capsule()
+                                        .stroke(.tertiary, lineWidth: 1)
+                                        .opacity(0.7)
+                                )
+                                .padding(10)
+                            
                         //                            .focused($isInputFieldFocused)
 #endif
                         Button {
@@ -110,8 +118,11 @@ struct ChatView: View {
                             }
                         } label: {
                             Image(systemName: aiChatModel.action_button_icon)
+                                .padding(.trailing)
+                                .imageScale(.large)
+                                
                         }
-                        .padding(.horizontal, 6.0)
+                        
                         .disabled((inputText.isEmpty && !aiChatModel.predicting))
                         .keyboardShortcut(.defaultAction)
 #if os(macOS)
@@ -121,7 +132,8 @@ struct ChatView: View {
                     }
                     .padding(.leading, 10)
                     .padding(.trailing, 5)
-                    .padding(.bottom, 5)
+                    .padding(.bottom, 10)
+                    .padding(.top, 5)
                     .onChange(of: aiChatModel.AI_typing){ ai_typing in
                         //                .onChange(of: aiChatModel.messages.count){ count in
                         // Fix for theese https://developer.apple.com/forums/thread/712510
@@ -141,7 +153,7 @@ struct ChatView: View {
                         }
                     }
                     .frame(height:47)
-                    .background(.regularMaterial)
+                    
                     //                .padding(.bottom)
                     //                .padding(.leading)
                     //                .padding(.trailing)
